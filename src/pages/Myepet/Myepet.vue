@@ -2,7 +2,7 @@
   <div class="login">
     <div class="head">
       <div class="head-top">
-        <span class="back"></span>
+        <span class="back" @click="back"></span>
         <span class="logininfo">注册</span>
       </div>
       <div class="mlogin">
@@ -68,7 +68,14 @@
   </div>
 </template>
 <script>
-  export default{}
+  export default{
+    methods:{
+      back(){
+        this.$router.back()
+      }
+
+    },
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   .login

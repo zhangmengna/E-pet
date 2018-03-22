@@ -6,7 +6,7 @@
       </span>
       <span>首页</span>
     </a>
-    <a href="javascript:;" class="type" :class="{on:$route.path==='/type'}" @click="goto('/type')">
+    <a href="javascript:;" class="type" :class="{on:$route.path==='/type'||$route.path==='/pinpai'}" @click="goto('/type')">
       <span class="item_icon">
         <i class="iconfont icon-icon04"></i>
       </span>
@@ -55,12 +55,13 @@
       text-align center
       flex-direction column
       justify-content center
+      background #fff
       color #999
       &.on
         color lightgreen
       span
         font-size 10px
-        margin-top 0
+        margin-top -3px
         .iconfont
           font-size 21px
 

@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <div class="top">
-      <div class="appdown">
-      <span class="closebtn">
+      <div class="appdown" v-show="isShow">
+      <span class="closebtn" @click="hide">
         <img src="./images/closebtn_03.png">
       </span>
         <a href="#" class="dowing">
@@ -29,28 +29,10 @@
             </div>
           </div>
           <div class="main-item">
-            <div class="swiper-container swiper-nav">
+            <div class="swiper-container " id="swiper-nav">
               <ul class="swiper-wrapper">
-                <li class="swiper-slide">
-                  <span  class="on">首页</span>
-                </li>
-                <li class="swiper-slide">
-                  <span>狗狗主粮</span>
-                </li>
-                <li class="swiper-slide">
-                  <span>服饰城</span>
-                </li>
-                <li class="swiper-slide">
-                  <span>医疗保健</span>
-                </li>
-                <li class="swiper-slide">
-                  <span>零食玩具</span>
-                </li>
-                <li class="swiper-slide">
-                  <span>日用外出</span>
-                </li>
-                <li class="swiper-slide">
-                  <span>美容香波</span>
+                <li class="swiper-slide" v-for="(menu,index) in headMenus" :key="index" @click="tab(index)">
+                  <span  :class="{on:index=== num}">{{menu.menu_name}}</span>
                 </li>
               </ul>
             </div>
@@ -59,37 +41,28 @@
       </header>
     </div>
     <!--轮播-->
-    <div class="banner-nav">
-      <div class="swiper-container swiper-banner">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="./images/d945d3f1b34e0081cf8c9eb34def9096.jpg">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/9f49bbf054e4dcab567e1584f48db3f0.jpg">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/94d4681e2ab878c340d441a5c1c7b98a.jpg">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/f0e3af5548da9b04aa098004e07ff6c1.jpg">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/b898562338c7f04ac9b2fa3e5aec8b4c.jpg">
+    <div class="banner-nav" ref="banner">
+      <div class="swiper-container swiper-banner" v-if="imgsList[0]">
+        <div class="swiper-wrapper" >
+          <div class="swiper-slide" v-for="(item, index) in imgsList[0].value" :key="index">
+           <img :src="item.image">
           </div>
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <!--图片-->
-    <div class="img-nav img1">
-      <img src="./images/f7a233da603cf8e8927e0270a0628775.jpg">
+    <!--轮播下de图片-->
+    <div class="img-nav img1" v-if="imgsList[1]">
+      <img :src="imgsList[1].value[0].image">
     </div>
     <!--导航图-->
     <div class="column">
-      <ul>
-        <li>
+      <ul v-if="columnImgs">
+        <li v-for="(item, index) in columnImgs" :key="index">
+          <img :src="item.image">
+        </li>
+      <!--  <li>
           <img src="./images/4e820b334820dbb62178bd367cdd7ba6.jpg">
         </li>
         <li>
@@ -115,98 +88,124 @@
         </li>
         <li>
           <img src="./images/4e820b334820dbb62178bd367cdd7ba6.jpg">
-        </li>
-        <li>
-          <img src="./images/4e820b334820dbb62178bd367cdd7ba6.jpg">
-        </li>
+        </li>-->
       </ul>
     </div>
     <!--7张图片-->
-    <div class="img-nav img2">
-      <img src="./images/a4ae9a27e725c61fc988f8bc50de44c4.jpg">
+    <div class="img-nav img1" v-if="index>=2 && index<=8" v-for="(imglist,index) in imgsList">
+      <img :src="imglist.value[0].image">
     </div>
+    <!--<div class="img-nav img1" v-if="imgsList[2]">
+      <img :src="imgsList[2].value[0].image">
+    </div>
+    <div class="img-nav img1" v-if="imgsList[3]">
+      <img :src="imgsList[3].value[0].image">
+    </div>
+    <div class="img-nav img1" v-if="imgsList[4]">
+      <img :src="imgsList[4].value[0].image">
+    </div>
+    <div class="img-nav img1" v-if="imgsList[5]">
+      <img :src="imgsList[5].value[0].image">
+    </div>
+    <div class="img-nav img1" v-if="imgsList[6]">
+      <img :src="imgsList[6].value[0].image">
+    </div>
+    <div class="img-nav img1" v-if="imgsList[7]">
+      <img :src="imgsList[7].value[0].image">
+    </div>
+    <div class="img-nav img1" v-if="imgsList[8]">
+      <img :src="imgsList[8].value[0].image">
+    </div>-->
     <!--flex布局图-->
-    <div class="boxflex">
-      <div class="boximg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-      </div>
-      <div class="boximg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-      </div>
-      <div class="boximg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-      </div>
-      <div class="boximg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
-        <img src="./images/ff42bbd85e6982cabee4e86281a1ade2.jpg">
+    <div class="boxflex" v-if="adBrands[0]">
+      <div class="boximg" v-for="(items, index) in adBrands[0].content_images" :key="index">
+        <div v-for="(item, index) in items" :key="index">
+          <img :src="item.image">
+        </div>
       </div>
     </div>
     <!--打折区图-->
-    <div class="img-nav img3">
-      <img src="./images/a5c9f132f39d76d5d850ccf8a5062dab.jpg">
+    <div class="img-nav img1" v-if="index>=9 && index <=11" v-for="(imglist,index) in imgsList">
+      <img :src="imglist.value[0].image">
     </div>
+   <!-- <div class="img-nav img1" v-if="imgsList[9]">
+      <img :src="imgsList[9].value[0].image">
+    </div>
+    <div class="img-nav img1" v-if="imgsList[10]">
+      <img :src="imgsList[10].value[0].image">
+    </div>
+    <div class="img-nav img1" v-if="imgsList[11]">
+      <img :src="imgsList[11].value[0].image">
+    </div>-->
     <!--打折主题 + 内容 flex 2*1  4个-->
-    <div class="img-nav">
-      <img src="./images/ac461067567c12307f3d2eeb3c2bd682.jpg">
+    <div class="flex-two" v-if="adBrands[1]">
+      <div v-for="(item, index) in adBrands[1].content_images" :key="index">
+        <img :src="list.image" v-for="(list,index) in item" :key="index">
+      </div>
     </div>
-    <div class="flex-two">
-      <img src="./images/6fa41c20fc9205819a8938dcf4f8b27e.jpg">
-      <img src="./images/6fa41c20fc9205819a8938dcf4f8b27e.jpg">
+    <!--2-->
+    <div class="img-nav img1" v-if="imgsList[12]">
+      <img :src="imgsList[12].value[0].image">
     </div>
+    <div class="flex-two" v-if="adBrands[2]">
+      <div v-for="(item, index) in adBrands[2].content_images" :key="index">
+        <img :src="list.image" v-for="(list,index) in item" :key="index">
+      </div>
+    </div>
+    <!--3-->
+    <div class="img-nav img1" v-if="imgsList[13]">
+      <img :src="imgsList[13].value[0].image">
+    </div>
+    <div class="flex-two" v-if="adBrands[3]">
+      <div v-for="(item, index) in adBrands[3].content_images" :key="index">
+        <img :src="list.image" v-for="(list,index) in item" :key="index">
+      </div>
+    </div>
+    <!--4-->
+    <div class="img-nav img1" v-if="imgsList[14]">
+      <img :src="imgsList[14].value[0].image">
+    </div>
+    <div class="flex-two" v-if="adBrands[4]">
+      <div v-for="(item, index) in adBrands[4].content_images" :key="index">
+        <img :src="list.image" v-for="(list,index) in item" :key="index">
+      </div>
+    </div>
+    <!--带白边 播放视频-->
 
-    <!--带白边的img-->
-    <div class="img-nav img4">
-      <img src="./images/a615cab7d108cca7a3257a553beadefa.jpg">
+
+    <div class="img-nav img4" v-if="imgsList[15]">
+      <img :src="imgsList[15].value[0].image">
     </div>
     <!--img5-->
-    <div class="img-nav img5">
-      <img src="./images/8cdca6e9a41217e6369db357a37a1b87.jpg">
+    <div class="img-nav img1" v-if="imgsList[15]">
+      <img :src="imgsList[15].value[0].image">
     </div>
     <!--flex 2*2-->
-    <div class="flex-two2">
-      <div class="flex flex1">
-        <img src="./images/edfa245b5f6d6be9f77842c49d837fb9.jpg">
-        <img src="./images/1d4a6de2764aeea0c6f15ba3d871317a.jpg">
+    <div class="flex-two2" v-if="adBrands[5]">
+      <div class="flex flex1" v-for="(items, index) in adBrands[5].content_images" :key="index">
+        <img v-for="(item,index) in items" :key="index" :src="item.image">
       </div>
-      <div class="flex flex2">
+      <!--<div class="flex flex2">
         <img src="./images/9287d4348daf658d9e3561841d240be2.jpg">
         <img src="./images/114db902c4aee3711f585ac7e9718ec2.jpg">
-      </div>
+      </div>-->
     </div>
     <!--flex 2*1-->
-    <div class="flex-two3">
-      <img src="./images/a1590a7ca541d31440b6437e267b5c69.jpg">
-      <img src="./images/bed8c6c07c097ae431a49df32b7220a8.jpg">
+    <div class="flex-two3" v-if="adBrands[6]">
+      <div v-for="(items,index) in adBrands[6].content_images" :key="index">
+        <img :src="item.image" v-for="(item,index) in items" :key="index">
+      </div>
+
     </div>
     <!--flex 3*2-->
-    <div class="flex-two4">
-      <div>
-        <img src="./images/209978033544f1510853956c0248c136.jpg">
-        <img src="./images/209978033544f1510853956c0248c136.jpg">
-      </div>
-      <div>
-        <img src="./images/74def4e714d926706945a95dbcabb28d.jpg">
-        <img src="./images/74def4e714d926706945a95dbcabb28d.jpg">
-      </div>
-      <div>
-        <img src="./images/74def4e714d926706945a95dbcabb28d.jpg">
-        <img src="./images/74def4e714d926706945a95dbcabb28d.jpg">
+    <div class="flex-two4" v-if="adBrands[7]">
+      <div v-for="(items, index) in adBrands[7].content_images" :key="index">
+        <img :src="item.image" v-for="(item,index) in items" :key="index">
       </div>
     </div>
     <!--空图-->
-    <div class="img-nav">
-      <img src="./images/c1406dc530a2cd3adee4ebfaa2c0506f.jpg">
+    <div class="img-nav" v-if="imgsList[16]">
+      <img :src="imgsList[16].value[0].image">
     </div>
     <!--每日特价-->
     <div class="surprise">
@@ -263,7 +262,6 @@
           </ul>
         </div>
       </div>
-
     </div>
 
     <div class="main-footer">
@@ -277,36 +275,72 @@
         © wap.epet.com 版权：重庆易宠科技有限公司
       </div>
     </div>
+   <!--定位动态图-->
+    <div class="dog eyeclo"></div>
 
     <FooterGuide/>
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
   import FooterGuide from '../../components/FooterGuide/FooterGuide.vue'
   //import Banner from '../../components/Banner/Banner.vue'
   export default{
+    data(){
+      return{
+        isShow: true,
+        num:0
+      }
+    },
+    methods:{
+      hide(){
+        this.isShow = !this.isShow
+        this.$refs.banner.style.marginTop = '86px'
+      },
+      tab(index){
+        this.num = index
+      }
+    },
     mounted(){
-      new Swiper('.swiper-nav',{
-        slidesPerView:5,
-        freeMode:true,
-      });
+      this.$store.dispatch('getHeadMenus',()=>{
+        this.$nextTick(()=>{
+          const swipernav =new Swiper('#swiper-nav',{
+            slidesPerView:5,
+            freeMode:true,
+          });
+        })
+      })
+      this.$store.dispatch('getImgsList',()=>{
+        this.$nextTick(()=>{
+          const swiperbanner = new Swiper('.swiper-banner', {
+            centeredSlides: true,
+            loop:true,
+            autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+          })
+        })
+      })
+      this.$store.dispatch('getColumnImgs')
+
+      this.$store.dispatch('getAdBrands')
+
       new Swiper('.swiper-pro',{
         slidesPerView:3.5,
         freeMode:true,
       })
-      new Swiper('.swiper-banner', {
-        centeredSlides: true,
-        loop:true,
-        autoplay:true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      });
-    },
 
+    },
+    computed:{
+      ...mapState(['headMenus','imgsList','columnImgs','adBrands'])
+    },
     components:{
       FooterGuide
     }
@@ -314,6 +348,25 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin.styl"
+  .dog
+    background url("./images/godog.png") no-repeat
+    width 41px
+    height 46px
+    background-size 80px auto
+    position fixed
+    bottom 15%
+    right: -1px
+    z-index 10px
+    animation eyeclo 2.5px steps(2) infinite
+    @keyframes eyeclo {
+      50%{ transform: translate(-87px)}
+    }
+  .swiper-pagination-bullet-active{
+    height 6px
+    width 16px
+    border-radius 3px 0 0 3px
+    background: #fff;
+  }
   .main
     margin-bottom 46px
     background #fff
@@ -329,7 +382,7 @@
         background pink
         .closebtn
           display inline-block
-          width 1%
+          width 20px
           position absolute
           top 10%
           left 5px
@@ -407,10 +460,11 @@
       .swiper-container
         width 100%
         height 100%
-        .swiper-wraper
+        .swiper-wrapper
           .swiper-slide
-            img
-              height 160px
+            >img
+              width 100%
+
     .img-nav
       width 100%
       overflow hidden
@@ -420,14 +474,15 @@
         height 100%
     .column
       width 100%
-      height 180px
+      overflow hidden
       ul
+        clearFix()
         width 100%
-        height 180px
         li
           float left
           width 20%
           img
+            display block
             width 100%
 
     /*flex布局图*/
@@ -441,17 +496,19 @@
         width 25%
         display flex
         flex-direction column
-        img
-          width 100%
+        div
+          img
+            display block
+            width 100%
+            height 94px
 
     .flex-two
       display flex
       overflow hidden
-      img
-        display block
-        width 50%
-        height 50%
-
+      div
+        img
+          display block
+          width 100%
     .img4
       padding-bottom 25px
 
@@ -469,12 +526,10 @@
       display flex
       width 100%
       height 186px
-      img:nth-child(1)
-        display block
-        width 154px
-      img:nth-child(2)
-        display block
-        width 221px
+      div
+        img
+          display block
+          height 186px
 
 
     .flex-two4
