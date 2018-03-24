@@ -9,19 +9,19 @@
         <img src="./images/logo.png">
       </div>
       <div class="loginway">
-        <span>
+        <span @click="setLoginWay(true)">
         普通登录
-        <i class="on"></i>
+        <i :class="{on:loginWay}"></i>
       </span>
-        <span>
+        <span @click="setLoginWay(false)">
         手机动态密码登录
-        <i class></i>
+        <i :class="{on:!loginWay}"></i>
       </span>
       </div>
     </div>
     <div class="center">
       <div class="login-form">
-        <form class="old-way">
+        <form class="old-way" :class="{on:loginWay}">
           <div>
             <span class="person"></span>
             <input type="text" placeholder="手机号/邮箱/用户名">
@@ -31,7 +31,7 @@
             <input type="password" placeholder="输入密码">
           </div>
         </form>
-        <form class="phone-way on">
+        <form class="phone-way" :class="{on: !loginWay}">
           <div>
             <span class="person"></span>
             <input type="text" placeholder="手机号/邮箱/用户名">
@@ -69,11 +69,18 @@
 </template>
 <script>
   export default{
+    data(){
+      return{
+        loginWay: true,
+      }
+    },
     methods:{
       back(){
         this.$router.back()
-      }
-
+      },
+      setLoginWay(loginWay){
+        this.loginWay = loginWay
+      },
     },
   }
 </script>

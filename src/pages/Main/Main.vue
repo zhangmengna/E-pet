@@ -476,10 +476,10 @@
       width 100%
       overflow hidden
       ul
-        clearFix()
+        display flex
+        flex-wrap wrap
         width 100%
         li
-          float left
           width 20%
           img
             display block

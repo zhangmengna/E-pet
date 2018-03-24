@@ -47,9 +47,16 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   .cart-head
+    position fixed
+    top 0
+    left 0
+    right 0
+    z-index 100
+    width 100%
     overflow hidden
     background #fff
     .head-top
+      display flex
       height 50px
       border-bottom  1px  solid #f3f3f3
       padding 0 12px

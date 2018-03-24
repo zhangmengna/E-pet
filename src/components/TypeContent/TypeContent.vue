@@ -1,11 +1,15 @@
 <template>
   <div class="sort-nav">
-    <div class="sort-item">
-      <p class="title">热门分类
+    <div class="sort-item" v-for="(items,index) in types" :key="index">
+      <p class="title">{{items.title}}
         <img src="./images/cate_right_img.png">
       </p>
       <ul>
-        <li>
+        <li v-for="(item,index) in items.list" :key="index">
+          <img :src="item.photo">
+          <p>{{item.name}}</p>
+        </li>
+        <!--<li>
           <img src="./images/ae88c0ee37db66c0279e4db90bd3abb2.jpg">
           <p>国产狗粮</p>
         </li>
@@ -24,11 +28,7 @@
         <li>
           <img src="./images/ae88c0ee37db66c0279e4db90bd3abb2.jpg">
           <p>国产狗粮</p>
-        </li>
-        <li>
-          <img src="./images/ae88c0ee37db66c0279e4db90bd3abb2.jpg">
-          <p>国产狗粮</p>
-        </li>
+        </li>-->
       </ul>
     </div>
   </div>
@@ -36,7 +36,10 @@
 <script>
   export default{
     props:{
-      typesList: Array
+      types: Array
+    },
+    mounted(){
+      //console.log('222',this.typesList)
     }
   }
 </script>

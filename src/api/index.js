@@ -15,3 +15,7 @@ export const reqAdBrands = () => ajax('/adBrands')
 // 分类名称  列表
 export const reqTypesName = () => ajax('/typesName')
 export const reqTypesList = () => ajax('/typesList')
+
+export const reqClassBrands = () => ajax('/getClassBrands')
+// 获取所有品牌
+export const reqAllBrands = () => ajax('/getAllBrands')

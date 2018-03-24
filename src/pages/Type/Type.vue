@@ -4,17 +4,22 @@
     <div class="killbox">
       <div class="leftbox" ref="leftbox">
         <ul>
-          <li :class="{on:num === index}" @click="tab(index)"
-              v-for="(item, index) in typesName" :key="index">{{item.name}}</li>
+          <li :class="{on:num === index1}" @click="tab(index1)"
+              v-for="(item, index1) in typesName" :key="index1">{{item.name}}</li>
         </ul>
       </div>
       <div class="rightbox" ref="rightbox">
-        <!--食物-->
-        <TypeContent :typesList="item.list"/>
-        <!--热门品牌-->
-        <HotBrands/>
-
-
+        <div class="wrap">
+          <div v-for="(item, index2) in commonbrands" :key="index2"
+                 :class="{on:num === index2}">
+            <!--食物-->
+            <TypeContent :types="item.types"/>
+            <!--<TypeContent/>
+            <TypeContent/>-->
+            <!--热门品牌-->
+            <HotBrands  v-if="item.hotBrands[0]"  :hotbrands="item.hotBrands[0]"/>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -45,6 +50,8 @@
         })
       })
 
+
+
       this.$store.dispatch('getTypesList',() =>{
         this.$nextTick(() => {
           if(!this.listScroll){
@@ -55,7 +62,7 @@
             this.listScroll.refresh()
           }
         })
-      })
+      });
 
     },
     methods:{
@@ -64,11 +71,23 @@
       }
     },
     computed:{
-      ...mapState(['typesName','typesList'])
+      ...mapState(['typesName','typesList']),
+
+      commonbrands () {
+        let arr = []
+        arr = this.typesList.map(item =>{
+          const types = item.filter(i => i.type===0)
+          const hotBrands = item.filter(i => i.type===2)
+          const arr = {types,hotBrands}
+          return  arr
+        })
+        console.log('111',arr)
+        return arr
+      }
     },
     components:{
       Typehead,
-      TypeContent,
+     TypeContent,
       HotBrands
     }
   }
@@ -107,10 +126,10 @@
         left 0
         margin-left 75px
         border-top 5px solid #f3f4f5
-        .sort-nav
-          display none
-          padding 5px 5px 20px
-          border-top 1px solid #f3f4f5
-          &.on
-            display block
+        .wrap
+          >div
+            display none
+            &.on
+              display block
+
 </style>

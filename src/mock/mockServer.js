@@ -2,8 +2,8 @@ import Mock from 'mockjs'
 
 import data from './data.json'
 import types from './types.json'
-
-// import brands from './brands.json'
+import brands from './brands.json'
+import allbrands from './allbrands.json'
 //头部导航栏数据
 Mock.mock('/headmenus',{code:0, data: data.menus})
 
@@ -15,7 +15,6 @@ Mock.mock('/imgslist',{code:0, data:imgsList})
 //获取column的图片 图标导航
 const columnImgs = data.datas.filter(item => item.type === '3')
 Mock.mock('/columnImgs',{code:0, data: columnImgs[0].menus})
-/* console.log(columnImgs[0].menus)*/
 
 // 通用广告模板 打折品牌
 const adBrands = data.datas.filter(item => item.type === '13')
@@ -26,3 +25,9 @@ Mock.mock('/adBrands',{code: 0, data: adBrands})
 Mock.mock('/typesName',{code: 0, data: types.name})
 // 列表
 Mock.mock('/typesList',{code:0, data: types.list})
+// console.log(types.list)
+// 品牌分类
+Mock.mock('/getClassBrands',{code:0, data: brands.brand})
+// 获取所有品牌
+Mock.mock('/getAllBrands',{code: 0, data: allbrands.brand})
+

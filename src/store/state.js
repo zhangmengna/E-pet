@@ -6,4 +6,6 @@ export default {
   adBrands: [], // 所有的打折品牌
   typesName: [], //分类名称
   typesList: [], // 分类列表
+  classBrands:[] ,// 分类品牌
+  allBrands: [], // 所有品牌
 }

@@ -11,3 +11,7 @@ export const RECEVIE_ADBRANDS = 'recevie_adbrands'
 export const RECEVIE_TYPESNAME = 'recevie_typesname'
 export const RECEVIE_TYPESLIST = 'recevie_typeslist'
 
+export const RECEVIE_CLASSBRANDS = 'recevie_classbrands'
+export const RECEVIE_ALLBRANDS = 'recevie_allbrands'
+
+

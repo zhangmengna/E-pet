@@ -7,6 +7,8 @@ import {
   RECEVIE_ADBRANDS,
   RECEVIE_TYPESNAME,
   RECEVIE_TYPESLIST,
+  RECEVIE_CLASSBRANDS,
+  RECEVIE_ALLBRANDS,
 } from './mutation-types'
 
 export default {
@@ -28,6 +30,11 @@ export default {
   [RECEVIE_TYPESLIST](state,{typesList}){
     state.typesList = typesList
   },
-
+  [RECEVIE_CLASSBRANDS](state,{classBrands}){
+    state.classBrands = classBrands
+  },
+  [RECEVIE_ALLBRANDS](state,{allBrands}){
+    state.allBrands = allBrands
+  },
 
 }

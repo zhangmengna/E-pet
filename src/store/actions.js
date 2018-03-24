@@ -6,6 +6,8 @@ import {
   reqAdBrands,
   reqTypesName,
   reqTypesList,
+  reqClassBrands,
+  reqAllBrands,
 } from '../api'
 
 import {
@@ -15,6 +17,8 @@ import {
   RECEVIE_ADBRANDS,
   RECEVIE_TYPESNAME,
   RECEVIE_TYPESLIST,
+  RECEVIE_CLASSBRANDS,
+  RECEVIE_ALLBRANDS,
 } from './mutation-types'
 /*
 使用async 和 await 的作用
@@ -74,6 +78,22 @@ export default {
     const result = await reqTypesList()
     if(result.code===0){
       commit(RECEVIE_TYPESLIST,{typesList: result.data})
+      callback && callback()
+    }
+  },
+
+  async getClassBrands({commit},callback){
+    const result = await reqClassBrands()
+    if(result.code===0){
+      commit(RECEVIE_CLASSBRANDS,{classBrands: result.data})
+      callback && callback()
+    }
+  },
+
+  async getAllBrands({commit},callback){
+    const result = await reqAllBrands()
+    if(result.code===0){
+      commit(RECEVIE_ALLBRANDS,{allBrands: result.data})
       callback && callback()
     }
   },
